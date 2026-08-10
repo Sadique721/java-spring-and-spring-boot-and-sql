@@ -1,7 +1,12 @@
 # ================================================================
 # application-render.yml
-# Spring Boot profile for Render.com deployment
-# Env vars injected by Render from the managed PostgreSQL database
+# Spring Boot profile for Render.com Docker deployment
+#
+# Render injects these env vars from the managed DB:
+#   SPRING_DATASOURCE_URL     → postgres://user:pass@host/dbname
+#   SPRING_DATASOURCE_USERNAME → springmastery
+#   SPRING_DATASOURCE_PASSWORD → <generated>
+#   PORT                       → 10000
 # ================================================================
 
 spring:
@@ -9,15 +14,14 @@ spring:
     name: spring-java-mastery-backend
 
   datasource:
-    # Render injects SPRING_DATASOURCE_URL as:
-    # postgres://user:pass@host/dbname
-    # Spring auto-converts postgresql:// scheme, but we set it explicitly
+    # Render provides "postgres://" URL — Spring Boot auto-converts it
+    # to "jdbc:postgresql://" via spring.datasource.url property binding
     url: ${SPRING_DATASOURCE_URL}
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
     hikari:
-      maximum-pool-size: 3          # Free tier: max 3 connections
+      maximum-pool-size: 3
       minimum-idle: 1
       connection-timeout: 30000
       idle-timeout: 600000
@@ -40,11 +44,12 @@ spring:
     validate-on-migrate: true
 
 server:
-  port: ${SERVER_PORT:10000}
+  port: ${PORT:10000}
   servlet:
     context-path: /
   error:
     include-message: always
+    include-binding-errors: never
 
 management:
   endpoints:
@@ -60,5 +65,6 @@ logging:
     com.springmastery: INFO
     org.springframework.web: WARN
     org.hibernate.SQL: WARN
+    org.flywaydb: INFO
   pattern:
-    console: "%d{HH:mm:ss} [%thread] %-5level %logger{20} - %msg%n"
+    console: "%d{HH:mm:ss} %-5level %logger{20} - %msg%n"
