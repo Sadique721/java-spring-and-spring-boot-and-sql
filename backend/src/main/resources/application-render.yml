@@ -1,0 +1,64 @@
+# ================================================================
+# application-render.yml
+# Spring Boot profile for Render.com deployment
+# Env vars injected by Render from the managed PostgreSQL database
+# ================================================================
+
+spring:
+  application:
+    name: spring-java-mastery-backend
+
+  datasource:
+    # Render injects SPRING_DATASOURCE_URL as:
+    # postgres://user:pass@host/dbname
+    # Spring auto-converts postgresql:// scheme, but we set it explicitly
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 3          # Free tier: max 3 connections
+      minimum-idle: 1
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: false
+        default_schema: public
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    validate-on-migrate: true
+
+server:
+  port: ${SERVER_PORT:10000}
+  servlet:
+    context-path: /
+  error:
+    include-message: always
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    com.springmastery: INFO
+    org.springframework.web: WARN
+    org.hibernate.SQL: WARN
+  pattern:
+    console: "%d{HH:mm:ss} [%thread] %-5level %logger{20} - %msg%n"

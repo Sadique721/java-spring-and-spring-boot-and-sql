@@ -1,0 +1,36 @@
+databases:
+  - name: springmastery-db
+    databaseName: springmastery
+    user: springmastery
+    plan: free
+    region: singapore
+
+services:
+  - type: web
+    name: spring-java-mastery
+    runtime: java
+    region: singapore
+    plan: free
+    rootDir: backend
+    buildCommand: mvn clean package -DskipTests -B
+    startCommand: java -Xmx400m -Xms128m -XX:+UseSerialGC -XX:MaxMetaspaceSize=128m -jar target/backend-1.0.0-SNAPSHOT.jar
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: springmastery-db
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: springmastery-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: springmastery-db
+          property: password
+      - key: SPRING_PROFILES_ACTIVE
+        value: render
+      - key: JAVA_TOOL_OPTIONS
+        value: "-Xmx400m -Xms128m -XX:+UseSerialGC -XX:MaxMetaspaceSize=128m"
+      - key: SERVER_PORT
+        value: "10000"
