@@ -17,7 +17,7 @@ services:
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: render
-      # Internal JDBC connection string (postgres:// format — auto-converted by Spring)
+      # Full postgres:// URL — auto-converted to jdbc:postgresql:// by RenderDatabaseUrlPostProcessor
       - key: SPRING_DATASOURCE_URL
         fromDatabase:
           name: springmastery-db
@@ -34,6 +34,3 @@ services:
         value: "10000"
       - key: SERVER_PORT
         value: "10000"
-      # Disable data seeding if DB already has content (set to false after first deploy)
-      - key: APP_SEED_ENABLED
-        value: "true"
