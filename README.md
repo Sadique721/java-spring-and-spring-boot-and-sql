@@ -32,6 +32,21 @@
 </tr>
 </table>
 
+<!-- ========== NEW: SYSTEM DIAGRAM SECTION ========== -->
+## 📊 System Architecture & Workflow
+
+```mermaid
+flowchart TD
+    A[Client HTTP Request] --> B[Spring REST Controller]
+    B --> C[Service Logic Layer]
+    C --> D[Spring Data JPA Repository]
+    D --> E[(SQL Database)]
+    E --> D
+    D --> C
+    C --> B
+    B --> F[JSON HTTP Response]
+```
+
 ---
 
 <div align="center">
