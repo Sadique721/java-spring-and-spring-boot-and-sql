@@ -19,13 +19,13 @@
   <rect x="50" y="50" width="700" height="200" rx="10" fill="rgba(0, 0, 0, 0.25)" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1.5" />
   
   <text x="90" y="115" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="800" fill="#ffffff" letter-spacing="0.5">java-spring-and-spring-boot-and-sql</text>
-  <text x="90" y="145" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="400" fill="#e0f2fe" opacity="0.85">Java, Spring Boot & SQL Deep Dive</text>
+  <text x="90" y="145" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="400" fill="#e0f2fe" opacity="0.85">Java, Spring Boot &amp; SQL Deep Dive</text>
   
   <rect x="90" y="180" width="160" height="32" rx="6" fill="rgba(255, 255, 255, 0.1)" stroke="rgba(255, 255, 255, 0.2)" stroke-width="1" />
   <text x="170" y="201" font-family="monospace" font-size="12" font-weight="bold" fill="#38bdf8" text-anchor="middle">ENTERPRISE JAVA</text>
   
   <rect x="265" y="180" width="160" height="32" rx="6" fill="rgba(255, 255, 255, 0.1)" stroke="rgba(255, 255, 255, 0.2)" stroke-width="1" />
-  <text x="345" y="201" font-family="monospace" font-size="12" font-weight="bold" fill="#c084fc" text-anchor="middle">SQL & HIBERNATE</text>
+  <text x="345" y="201" font-family="monospace" font-size="12" font-weight="bold" fill="#c084fc" text-anchor="middle">SQL &amp; HIBERNATE</text>
   
   <ellipse cx="630" cy="120" rx="35" ry="12" fill="none" stroke="rgba(255, 255, 255, 0.4)" stroke-width="3" />
                <path d="M 595 120 V 150 C 595 160 665 160 665 150 V 120" fill="none" stroke="rgba(255, 255, 255, 0.4)" stroke-width="3" />
